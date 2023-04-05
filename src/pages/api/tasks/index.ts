@@ -1,5 +1,5 @@
-import { conn } from "@/utils/database";
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next"
+import { conn } from "../../../utils/database"
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -9,15 +9,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   switch (method) {
     case "GET":
-      return res.status(200).json("getting Tasks")
+      try {
+        const query = "SELECT * FROM tasks";
+        const response = await conn.query(query)
+        return res.status(200).json(response.rows)
+      } catch (error: any) {
+        return res.status(400).json({ error: error.message })
+      }
+
     case "POST":
-      const { title, description } = body;
-      const query = "INSERT INTO tasks(title, description) VALUES ($1, $2) RETURNING *";
-      const values = [title, description];
-      const response = await conn.query(query, values)
-      console.log(response)
-      return res.status(200).json(response.rows[0]);
-    
+      try {
+        const { title, description } = body
+        const query = "INSERT INTO tasks(title, description) VALUES ($1, $2) RETURNING *";
+        const values = [title, description]
+        const response = await conn.query(query, values)
+       
+        return res.status(200).json(response.rows[0])
+        
+      } catch (error: any) {
+        return res.status(400).json({ error: error.message })
+      }
+
     default:
       return res.status(400).json("invalid Tasks")
   }
