@@ -1,4 +1,3 @@
-import { Console } from "console";
 import type { NextApiRequest, NextApiResponse } from "next"
 import { conn } from "src/utils/database"
 
