@@ -1,3 +1,4 @@
+import Layout from "@/components/Layout";
 import TaskList from "@/components/tasks/TaskList";
 import { useRouter } from "next/router";
 import { Task } from "src/interfaces/Tasks"
@@ -11,7 +12,7 @@ export default function Index({ tasks }: Props) {
   const router = useRouter()
 
   return (
-    <>
+    <Layout>
       {tasks.length === 0 ? (
         <section className="mt-12 flex items-center justify-center gap-x-4">
           <div>
@@ -28,7 +29,7 @@ export default function Index({ tasks }: Props) {
           <TaskList tasks={tasks} />
         
       )}
-    </>
+    </Layout>
   );
 }
 
