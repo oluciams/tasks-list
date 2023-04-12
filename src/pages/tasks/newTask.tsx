@@ -1,4 +1,5 @@
 import { Task } from "@/interfaces/Tasks";
+import Router, { useRouter } from "next/router";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export default function NewTask() {
@@ -7,6 +8,8 @@ export default function NewTask() {
     title: "",
     description:""
   })
+
+  const router = useRouter()
 
   const handleChangeTask = ({target: { name, value }}:ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
     setTask({...task, [name]: value })
@@ -25,7 +28,8 @@ export default function NewTask() {
    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
      e.preventDefault()
      try {
-      await createTask(task)
+       await createTask(task)
+       router.push("/")
      } catch (error) {
       console.log(error)
      }
