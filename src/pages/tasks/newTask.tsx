@@ -36,6 +36,18 @@ export default function NewTask() {
     })
   }
 
+  const handleDeleteTask = async (id: string) => {
+    try {
+      await fetch(`http://localhost:3000/api/tasks/${id}`, {
+        method: "DELETE"
+      });
+      
+      router.push("/")
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
      e.preventDefault()
      try {
@@ -120,6 +132,18 @@ export default function NewTask() {
               )}
             </div>
           </div>
+          {
+            router.query.id && (
+              <button
+                type="submit"
+                onClick={() => typeof router.query.id === "string" && handleDeleteTask(router.query.id)}
+                className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+              >
+                Delete
+              </button>
+
+            )
+          }
         </form>
       </section>
     </Layout>
