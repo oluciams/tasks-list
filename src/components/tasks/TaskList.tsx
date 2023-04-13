@@ -1,4 +1,5 @@
 import { Task } from "@/interfaces/Tasks";
+import { Router, useRouter } from "next/router";
 
 interface Props {
   tasks: Task[];
@@ -6,11 +7,13 @@ interface Props {
 
 export default function TaskList({ tasks }: Props) {
 
+  const router = useRouter()
+
   return (
     <section>
       {
         tasks.map((task) => (
-          <div key={task.id} className="border">
+          <div key={task.id} onClick={() => router.push(`/tasks/edit/${task.id}`)} className="border">
             <div className="card-body">
               <h5 className="card-title">{task.title}</h5>
               <p className="card-text">{task.description}</p>
