@@ -1,4 +1,12 @@
+## Tasks List
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# Features
+
+The following are some of the feactures of this project:
+- Implementation of CRUD, database, dynamic routes in the backend and data visualization in the frontend with nextjs.
+- Styles CSS with Talwind.
 
 ## Getting Started
 
