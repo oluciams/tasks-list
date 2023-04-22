@@ -26,8 +26,9 @@ export default function Index({ tasks }: Props) {
           </div>
         </section>
       ) : (
+        <section className="container flex flex-wrap flex-row gap-6 mx-auto justify-center">
           <TaskList tasks={tasks} />
-        
+        </section>
       )}
     </Layout>
   );

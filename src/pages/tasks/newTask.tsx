@@ -79,12 +79,12 @@ export default function NewTask() {
 
   return (
     <Layout>
-      <section className="mt-10 ml-12 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+      <section className="container w-1/5 mx-auto columns-1 mt-10 sm:grid-cols-4">
         <form onSubmit={handleSubmit}>
           <div className="space-y-6">
             <label
               htmlFor="title"
-              className="block text-sm font-medium text-gray-900"
+              className="text-sm font-medium text-gray-900"
             >
               Title
             </label>
@@ -93,7 +93,7 @@ export default function NewTask() {
               name="title"
               onChange={handleChangeTask}
               value={task.title}
-              className="flex rounded-md ring-1 ring-gray-300 sm:max-w-md"
+              className="flex p-1 w-full outline-solid rounded-md ring-1 ring-black sm:max-w-md"
             />
 
             <div className="col-span-full border-b border-gray-900/10 pb-10">
@@ -107,7 +107,7 @@ export default function NewTask() {
                 <textarea
                   name="description"
                   rows={2}
-                  className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-black placeholder:text-gray-400 focus:ring-2 sm:py-1.5 sm:text-sm sm:leading-6"
                   value={task.description}
                   onChange={handleChangeTask}
                 />
@@ -130,20 +130,20 @@ export default function NewTask() {
                   Save
                 </button>
               )}
+              {router.query.id && (
+                <button
+                  type="submit"
+                  onClick={() =>
+                    typeof router.query.id === "string" &&
+                    handleDeleteTask(router.query.id)
+                  }
+                  className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                >
+                  Delete
+                </button>
+              )}
             </div>
           </div>
-          {
-            router.query.id && (
-              <button
-                type="submit"
-                onClick={() => typeof router.query.id === "string" && handleDeleteTask(router.query.id)}
-                className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-              >
-                Delete
-              </button>
-
-            )
-          }
         </form>
       </section>
     </Layout>
